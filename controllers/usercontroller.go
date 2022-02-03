@@ -1,24 +1,20 @@
 package controllers
 
 import (
+	"fibergo-learn/model"
+
 	"github.com/gofiber/fiber/v2"
 )
 
-type User struct {
-	Name   string `json:"name"`
-	Age    string `json:"age"`
-	Gender string `json:"gender"`
-}
-
 func CreateUserDetails(ctx *fiber.Ctx) error {
-	body := new(User)
+	body := new(model.User)
 	err := ctx.BodyParser(body)
 
 	if err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(err)
 	}
 
-	userDetails := User{
+	userDetails := model.User{
 		Name:   body.Name,
 		Age:    body.Age,
 		Gender: body.Gender,
@@ -33,7 +29,7 @@ func CreateUserDetails(ctx *fiber.Ctx) error {
 }
 
 func GetUserDetails(ctx *fiber.Ctx) error {
-	userDetails := User{
+	userDetails := model.User{
 		Name:   "Sabita Neupane",
 		Age:    "26",
 		Gender: "Female",

@@ -11,7 +11,7 @@ func main() {
 	app := fiber.New()
 	app.Use(logger.New())
 
-	routes.Register(app)
+	routes.Router(app)
 
 	app.Listen(":80")
 }

@@ -2,17 +2,15 @@ package routes
 
 import (
 	"fibergo-learn/controllers"
+	"fibergo-learn/routes/userroutes"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-func Register(app *fiber.App) {
-	app.Get("/", controllers.GetHelloWorld)
+func Router(app *fiber.App) {
+	app.Get("/", controllers.GetStaticPage)
+	app.Get("/hello", controllers.GetHelloWorld)
 	app.Get("/service-status", controllers.ServiceStatus)
-	app.Get("/api", controllers.GetStaticPage)
 
-	// grouping same/similar routes
-	fibergoApp := app.Group("/user")
-	fibergoApp.Get("/", controllers.GetUserDetails)
-	fibergoApp.Post("/", controllers.CreateUserDetails)
+	userroutes.Router(app)
 }
