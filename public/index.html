@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber Go - Learn</title>
+
+    <style>
+        table,
+        table tr,
+        table th,
+        table td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table th {
+            font-size: 25px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> Welcome to FiberGo project</h1>
+    <h2> API List </h2>
+    <table>
+        <tr>
+            <th> Method </th>
+            <th> Routes </th>
+            <th> Request </th>
+            <th> Response </th>
+        </tr>
+        <tr>
+            <td> GET</td>
+            <td> /service-status</td>
+            <td></td>
+            <td>
+                <pre>
+                    {
+                        "message": "All good from Fibergo Learn app."
+                    }
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td> GET</td>
+            <td> /user</td>
+            <td></td>
+            <td>
+                <pre>
+                    {
+                        "name": "Sabita Neupane",
+                        "age": "26",
+                        "gender": "Female"
+                    }
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td> POST</td>
+            <td> /user</td>
+            <td>
+                <pre>
+                    {
+                        "name": "Sabita Neupane",
+                        "age": "26",
+                        "gender": "Female"
+                    }
+                </pre>
+            </td>
+            <td>
+                <pre>
+                    {
+                        "data": {
+                            "name": "Sabita Neupane",
+                            "age": "26",
+                            "gender": "Female"
+                        },
+                        "message": "User Details Created Successfully"
+                    }
+                </pre>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,8 +1,7 @@
-package main
+package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 type User struct {
@@ -11,7 +10,7 @@ type User struct {
 	Gender string `json:"gender"`
 }
 
-func GetUserDatails(ctx *fiber.Ctx) error {
+func getUserDetails(ctx *fiber.Ctx) error {
 	userDetails := User{
 		Name:   "Sabita Neupane",
 		Age:    "26",
@@ -20,7 +19,7 @@ func GetUserDatails(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(userDetails)
 }
 
-func CreateUserDatails(ctx *fiber.Ctx) error {
+func createUserDetails(ctx *fiber.Ctx) error {
 	body := new(User)
 	err := ctx.BodyParser(body)
 
@@ -42,32 +41,29 @@ func CreateUserDatails(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(details)
 }
 
-func ServiceStatus(ctx *fiber.Ctx) error {
+func serviceStatus(ctx *fiber.Ctx) error {
 	msg := map[string]interface{}{
 		"message": "All good from Fibergo Learn app.",
 	}
 	return ctx.JSON(msg)
 }
 
-func main() {
-	app := fiber.New()
-	app.Use(logger.New()) // Middleware to log API request in terminal
+func helloWorld(ctx *fiber.Ctx) error {
+	return ctx.SendString("Hello World")
+}
 
-	app.Get("/", func(ctx *fiber.Ctx) error {
-		return ctx.SendString("Hello World")
-	})
+func getStaticPage(ctx *fiber.Ctx) error {
+	return ctx.Render("./public/index.html", fiber.Map{})
+}
 
-	app.Get("/service-status", ServiceStatus)
-
-	// Loading static files
-	app.Get("/api", func(c *fiber.Ctx) error {
-		return c.Render("./public/index.html", fiber.Map{})
-	})
+func Register(app *fiber.App) {
+	app.Get("/", helloWorld)
+	app.Get("/service-status", serviceStatus)
+	app.Get("/api", getStaticPage)
 
 	// grouping same/similar routes
 	fibergoApp := app.Group("/user")
-	fibergoApp.Get("/", GetUserDatails)
-	fibergoApp.Post("/", CreateUserDatails)
+	fibergoApp.Get("/", getUserDetails)
+	fibergoApp.Post("/", createUserDetails)
 
-	app.Listen(":80")
 }
